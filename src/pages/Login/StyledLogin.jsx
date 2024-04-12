@@ -20,5 +20,19 @@ export const LoginContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
+        
+`;
+
+export const InputStyled = styled.input`
+    border: 0;
+    border-radius: 15px;
+    padding: 1rem;
+    background-color: #6b8f84;
+    width: 70%;
+    margin: 1rem;
+    &::placeholder {
+    color: #ffffff;
+    opacity: 1;
+    }
 `;
