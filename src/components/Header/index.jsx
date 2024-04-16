@@ -1,12 +1,13 @@
 import { CiLogout } from "react-icons/ci";
 import { MdLeaderboard } from "react-icons/md";
+import { IoMdSettings } from "react-icons/io";
 import Logo from "../../components/Logo";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
     display: flex;
-    width: 100%;
     justify-content: space-around;
+    align-items: center;
     height: 80px;
     padding: 1.5rem;
     background-color: #6b8f84;
@@ -29,20 +30,21 @@ const StyledNav = styled.nav`
     justify-content: center;
 `;
 
-const Header = () => {
+const Header = ({ headerNick }) => {
     return(
         <StyledHeader>
             <Logo />
             <StyledUser>
-                <h1>Teste</h1>
+                <h1>{headerNick}</h1>
                 <StyledUserInfo>
                     <p>bla bla bla</p>
                     <p>bli bli bli</p>
                 </StyledUserInfo>
             </StyledUser>
             <StyledNav>
-                <CiLogout />
-                <MdLeaderboard />
+                <CiLogout size={25}/>
+                <MdLeaderboard size={25}/>
+                <IoMdSettings size={25}/>
             </StyledNav>
         </StyledHeader>
     )

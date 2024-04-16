@@ -7,14 +7,16 @@ import Leaderboard from './pages/Leaderboard'
 
 function App() {
 
+  const [nick, setNick] = useState('');
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Login />} />
+          <Route path='/' element={<Login nickLogin={setNick}/>} />
           <Route path='*' element={<PageNotFound />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
-          <Route path='/game' element={<Game />} />
+          <Route path='/game' element={<Game userNick={nick}/>} />
         </Routes>
       </BrowserRouter>
     </>
