@@ -12,6 +12,14 @@ export const ModalContainer = styled.aside`
     border-radius: 0 15px 15px 0;
     position: absolute;
     padding: 1rem;
+    & select {
+        width: 100%;
+        padding: 5px;
+    }
+    & label {
+        font-size: large;
+        font-weight: 400;
+    }
 `;
 
 export const ModalSelect = styled.select`

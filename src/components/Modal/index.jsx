@@ -5,7 +5,7 @@ const Modal = ({ close, cardsQtd }) => {
 
     return (
         <ModalContainer>
-            <label>Selecione a quantidade de pares</label>
+            <label>Selecione a quantidade de cartas</label>
             <ModalSelect required={true} onChange={e => cardsQtd(e.target.value)}>
                 <option value={""} selected disabled hidden>Escolha</option>
                 <option value={3}>3</option>

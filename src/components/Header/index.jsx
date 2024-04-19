@@ -1,6 +1,6 @@
 import { CiLogout } from "react-icons/ci";
+import { GrPowerReset } from "react-icons/gr";
 import { MdLeaderboard } from "react-icons/md";
-import { IoMdSettings } from "react-icons/io";
 import Logo from "../../components/Logo";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -31,24 +31,24 @@ const StyledNav = styled.nav`
     justify-content: center;
 `;
 
-const Header = ({ headerNick, config, gameFinished }) => {
+const Header = ({ headerNick, config }) => {
     return (
         <StyledHeader>
             <Logo />
             <StyledUser>
                 <h1>{headerNick}</h1>
                 <StyledUserInfo>
-                    contador
+                    <h3>CONTADOR</h3>
                 </StyledUserInfo>
             </StyledUser>
             <StyledNav>
                 <Link to={'/'}>
-                    <CiLogout size={25} />
+                    <CiLogout size={25} color="black"/>
                 </Link>
                 <Link to={'/leaderboard'}>
-                    <MdLeaderboard size={25} />
+                    <MdLeaderboard size={25} color="black"/>
                 </Link>
-                <IoMdSettings onClick={() => config()} size={25} />
+                {config && <GrPowerReset onClick={() => config()} size={25} color="black"/>}
             </StyledNav>
         </StyledHeader>
     )
