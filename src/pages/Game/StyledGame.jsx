@@ -7,6 +7,7 @@ export const GameContainer = styled.div`
     background-image: url(${LoginBackground}) ;
     background-size: cover;
     background-position: center;
+    box-sizing: border-box;
 `;
 
 export const ContainerCardsStyled = styled.div`
@@ -16,8 +17,4 @@ export const ContainerCardsStyled = styled.div`
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    & img {
-        max-height: 60%;
-        max-width: 80%;
-    }
 `;
