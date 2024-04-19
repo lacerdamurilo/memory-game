@@ -16,15 +16,14 @@ export const ContainerCardFront = styled.img`
     transform: ${(props) => props.rotate ? "rotateY(0deg)" : "rotateY(-180deg)"};
 `;
 
-const Card = ({ image, card, getCardFlipped, toggle, index, matched }) => {
+const Card = ({ image, card, getCardFlipped, toggle, index, matched, maxClickedCards }) => {
     
     const getCard = () => {
         getCardFlipped(index);
     }
-    console.log(`Carta: ${card.id} matched igual a ${matched}`);
     
     return (
-        <ContainerCard $matched={matched} onClick={getCard} rotate={toggle}>
+        <ContainerCard $matched={matched} onClick={maxClickedCards ? '' : getCard} rotate={toggle}>
             <ContainerCardFront src={image} alt='card-image' />
         </ContainerCard>
     )

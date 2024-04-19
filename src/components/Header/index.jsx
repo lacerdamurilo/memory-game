@@ -3,6 +3,7 @@ import { MdLeaderboard } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import Logo from "../../components/Logo";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledHeader = styled.header`
     display: flex;
@@ -30,21 +31,24 @@ const StyledNav = styled.nav`
     justify-content: center;
 `;
 
-const Header = ({ headerNick }) => {
-    return(
+const Header = ({ headerNick, config, gameFinished }) => {
+    return (
         <StyledHeader>
             <Logo />
             <StyledUser>
                 <h1>{headerNick}</h1>
                 <StyledUserInfo>
-                    <p>bla bla bla</p>
-                    <p>bli bli bli</p>
+                    contador
                 </StyledUserInfo>
             </StyledUser>
             <StyledNav>
-                <CiLogout size={25}/>
-                <MdLeaderboard size={25}/>
-                <IoMdSettings size={25}/>
+                <Link to={'/'}>
+                    <CiLogout size={25} />
+                </Link>
+                <Link to={'/leaderboard'}>
+                    <MdLeaderboard size={25} />
+                </Link>
+                <IoMdSettings onClick={() => config()} size={25} />
             </StyledNav>
         </StyledHeader>
     )

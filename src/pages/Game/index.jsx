@@ -11,18 +11,43 @@ const Game = ({ userNick }) => {
     const [randomCards, setRandomCards] = useState([]);
     const [flippedCards, setFlippedCards] = useState([]);
 
+    const [maxClickedCards, setMaxClickedCards] = useState(false);
+
     const getRandomCards = (array, number) => {
         const shuffledCards = array.sort(() => Math.random() - 0.5).slice(0, number);
-        const cloneCards = shuffledCards.slice().sort(() => Math.random() - 0.5);
-        const test = cloneCards.map(card => ({ ...card }));
-        return ([...shuffledCards, ...test]);
+        const clone = shuffledCards.slice().sort(() => Math.random() - 0.5);
+        const cloneCards = clone.map(card => ({ ...card }));
+        return ([...shuffledCards, ...cloneCards]);
     }
 
     useEffect(() => {
-        const pairsCards = getRandomCards(Cards, (cardsQtd));
+        const resetCards = Cards.map((card => {
+            card.toggle = false;
+            card.clicked = false;
+            card.matched = false;
+            card.flipped = false;
+            return card;
+        }));
+        const pairsCards = getRandomCards(resetCards, (cardsQtd));
+        console.log(pairsCards)
         setRandomCards(pairsCards);
     }, [cardsQtd]);
 
+    useEffect(() => {
+        const isGameFinished = randomCards.every(card => card.matched);
+        if (isGameFinished) {
+            setVisibility(true);
+        }
+    }, [randomCards]);
+
+    useEffect(() => {
+        if (flippedCards.length === 2){
+            setMaxClickedCards(true)
+        } else {
+            setMaxClickedCards(false)
+        }
+    }, [flippedCards]);
+    
     const getCardFlipped = (index) => {
         const card = randomCards[index];
         card.toggle = !card.toggle; // toggle do toggle ksks
@@ -46,16 +71,13 @@ const Game = ({ userNick }) => {
                     });
                     setRandomCards(removedCards);
                     setFlippedCards([]);
-                },1000)
+                }, 1000)
                 // errou
             } else {
                 setTimeout(() => {
                     setFlippedCards([]);//ainda n sei
-                    console.log(flippedCards);
                     const firstCardIndex = newCards[0];
-                    console.log(firstCardIndex);
                     const secondCardIndex = newCards[1];
-                    console.log(secondCardIndex);
                     const unflipedCards = gameCards.map((gameCard, index) => {
                         if (index === firstCardIndex || index === secondCardIndex) {
                             gameCard.flipped = !gameCard.flipped
@@ -69,18 +91,29 @@ const Game = ({ userNick }) => {
         }
     }
 
+    const resetGame = () => {
+        const resetCards = Cards.map((card => {
+            card.toggle = false;
+            card.clicked = false;
+            card.matched = true;
+            card.flipped = false;
+            return card;
+        }));
+        setRandomCards(resetCards);
+    }
+
     return (
         <>
             {visibility ?
                 <>
                     <GameContainer>
-                        <Header headerNick={userNick} />
+                        <Header headerNick={userNick} config={resetGame} />
                         <Modal close={() => setVisibility(false)} cardsQtd={setCardsQtd} />
                     </GameContainer>
                 </> :
                 <>
                     <GameContainer>
-                        <Header headerNick={userNick} />
+                        <Header headerNick={userNick} config={resetGame} />
                         <ContainerCardsStyled>
                             {randomCards.map((card, index) => {
                                 return (
@@ -92,6 +125,7 @@ const Game = ({ userNick }) => {
                                         toggle={card.toggle}
                                         index={index}
                                         matched={card.matched}
+                                        maxClickedCards={maxClickedCards}
                                     />
                                 )
                             })}
